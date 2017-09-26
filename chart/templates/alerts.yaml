@@ -1,0 +1,34 @@
+apiVersion: v1
+data:
+  sensor-latency-high: |
+    ALERT BETASensorLatencyHigh
+    IF (sensors_latency_milliseconds{quantile=~"0.95", stage="without_name_lookup",instance=~"^utils/${app_name?:app_name must be set}-${app_name?:app_name must be set}.*"} > 20)
+    FOR 1m
+    LABELS { severity = "warning", team = "platform" }
+    ANNOTATIONS {
+      summary = "95% latency is high",
+      description = "Latency appears to be high. Please look for a corellated event on sensor or other nodes"
+    }
+  recording-sensors-nodns: |
+    sensors_nodns:sensors_latency_milliseconds:rate1m{} = rate(sensors_latency_milliseconds_histogram_bucket{instance=~"^utils/pods/sensors-sensors.*",stage="without_name_lookup"}[1m])
+  recording-sensors-p95-nodns: |
+    sensors_p95_nodns:sensors_latency_milliseconds_histogram_bucket:histogram_quantile_rate1m{} = histogram_quantile(0.95, sum(sensors_nodns:sensors_latency_milliseconds:rate1m) BY (le, path))
+  recording-sensors-p99-nodns: |
+    sensors_p99_nodns:sensors_latency_milliseconds_histogram_bucket:histogram_quantile_rate1m{} = histogram_quantile(0.99, sum(sensors_nodns:sensors_latency_milliseconds:rate1m) BY (le, path))
+  recording-sensors-p999-nodns: |
+    sensors_p999_nodns:sensors_latency_milliseconds_histogram_bucket:histogram_quantile_rate1m{} = histogram_quantile(0.999, sum(sensors_nodns:sensors_latency_milliseconds:rate1m) BY (le, path))
+  recording-sensors-dns: |
+    sensors_dns:sensors_latency_milliseconds:rate1m{} = rate(sensors_latency_milliseconds_histogram_bucket{instance=~"^utils/pods/sensors-sensors.*",stage="name_lookup"}[1m])
+  recording-sensors-p95-dns: |
+    sensors_p95_dns:sensors_latency_milliseconds_histogram_bucket:histogram_quantile_rate1m{} = histogram_quantile(0.95, sum(sensors_dns:sensors_latency_milliseconds:rate1m) BY (le))
+  recording-sensors-p99-dns: |
+    sensors_p99_dns:sensors_latency_milliseconds_histogram_bucket:histogram_quantile_rate1m{} = histogram_quantile(0.99, sum(sensors_dns:sensors_latency_milliseconds:rate1m) BY (le))
+  recording-sensors-p999-dns: |
+    sensors_p999_dns:sensors_latency_milliseconds_histogram_bucket:histogram_quantile_rate1m{} = histogram_quantile(0.999, sum(sensors_dns:sensors_latency_milliseconds:rate1m) BY (le, path))
+kind: ConfigMap
+metadata:
+  annotations:
+    nordstrom.net/prometheus-rules: "true"
+  labels:
+    app: {{ template "fullname" . }}
+  name: {{ template "fullname" . }}-telemetry-alert-rules

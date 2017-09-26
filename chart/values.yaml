@@ -1,0 +1,18 @@
+image:
+  name: quay.io/nordstrom/cluster-sensors
+  tag: latest
+pullPolicy: Always
+resources:
+  limits:
+    memory: 64Mi
+  requests:
+    cpu: 256m
+    memory: 32Mi
+latency:
+  milliseconds_between_requests: 83
+  ingress:
+    url:
+  loadbalancer:
+    url:
+  internal:
+    url:

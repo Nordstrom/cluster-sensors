@@ -1,0 +1,173 @@
+{
+	"ImportPath": "git.nordstrom.net/k8s/platform-bootstrap/applications/cluster-sensors",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/awserr",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/awsutil",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/client",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/client/metadata",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/corehandlers",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/credentials",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/credentials/endpointcreds",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/defaults",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/ec2metadata",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/endpoints",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/request",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/signer/v4",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/private/protocol/rest",
+			"Comment": "v1.6.25-1-ge43e7ed8",
+			"Rev": "e43e7ed87a3584fd820402855e7ff990fb10239f"
+		},
+		{
+			"ImportPath": "github.com/beorn7/perks/quantile",
+			"Rev": "4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9"
+		},
+		{
+			"ImportPath": "github.com/go-ini/ini",
+			"Comment": "v1.23.0",
+			"Rev": "6f66b0e091edb3c7b380f7c4f0f884274d550b67"
+		},
+		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "8ee79997227bf9b34611aee7946ae64735e6fd93"
+		},
+		{
+			"ImportPath": "github.com/gopherjs/gopherjs/js",
+			"Rev": "c79d0a5dbbdaf21092548246e69886a08f5a8e31"
+		},
+		{
+			"ImportPath": "github.com/jmespath/go-jmespath",
+			"Comment": "0.2.2-14-gbd40a43",
+			"Rev": "bd40a432e4c76585ef6b72d3fd96fb9b6dc7b68d"
+		},
+		{
+			"ImportPath": "github.com/jtolds/gls",
+			"Comment": "v4.2.0",
+			"Rev": "8ddce2a84170772b95dd5d576c48d517b22cac63"
+		},
+		{
+			"ImportPath": "github.com/matttproud/golang_protobuf_extensions/pbutil",
+			"Comment": "v1.0.0-2-gc12348c",
+			"Rev": "c12348ce28de40eed0136aa2b644d0ee0650e56c"
+		},
+		{
+			"ImportPath": "github.com/prometheus/client_golang/prometheus",
+			"Comment": "v0.8.0-42-g575f371",
+			"Rev": "575f371f7862609249a1be4c9145f429fe065e32"
+		},
+		{
+			"ImportPath": "github.com/prometheus/client_model/go",
+			"Comment": "model-0.0.2-12-gfa8ad6f",
+			"Rev": "fa8ad6fec33561be4280a8f0514318c79d7f6cb6"
+		},
+		{
+			"ImportPath": "github.com/prometheus/common/expfmt",
+			"Rev": "6d76b79f239843a04e8ad8dfd8fcadfa3920236f"
+		},
+		{
+			"ImportPath": "github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg",
+			"Rev": "6d76b79f239843a04e8ad8dfd8fcadfa3920236f"
+		},
+		{
+			"ImportPath": "github.com/prometheus/common/model",
+			"Rev": "6d76b79f239843a04e8ad8dfd8fcadfa3920236f"
+		},
+		{
+			"ImportPath": "github.com/prometheus/procfs",
+			"Rev": "fcdb11ccb4389efb1b210b7ffb623ab71c5fdd60"
+		},
+		{
+			"ImportPath": "github.com/smartystreets/assertions",
+			"Comment": "1.6.0-10-g2063fd1",
+			"Rev": "2063fd1cc7c975db70502811a34b06ad034ccdf2"
+		},
+		{
+			"ImportPath": "github.com/smartystreets/assertions/internal/go-render/render",
+			"Comment": "1.6.0-10-g2063fd1",
+			"Rev": "2063fd1cc7c975db70502811a34b06ad034ccdf2"
+		},
+		{
+			"ImportPath": "github.com/smartystreets/assertions/internal/oglematchers",
+			"Comment": "1.6.0-10-g2063fd1",
+			"Rev": "2063fd1cc7c975db70502811a34b06ad034ccdf2"
+		},
+		{
+			"ImportPath": "github.com/smartystreets/goconvey/convey",
+			"Comment": "1.6.2-8-g7befa7f",
+			"Rev": "7befa7fd6e2e8ca28d2b94f2d39111929904b08d"
+		},
+		{
+			"ImportPath": "github.com/smartystreets/goconvey/convey/gotest",
+			"Comment": "1.6.2-8-g7befa7f",
+			"Rev": "7befa7fd6e2e8ca28d2b94f2d39111929904b08d"
+		},
+		{
+			"ImportPath": "github.com/smartystreets/goconvey/convey/reporting",
+			"Comment": "1.6.2-8-g7befa7f",
+			"Rev": "7befa7fd6e2e8ca28d2b94f2d39111929904b08d"
+		}
+	]
+}

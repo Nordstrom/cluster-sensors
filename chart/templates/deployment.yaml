@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.pullPolicy }}
+        env:
+          - name: LATENCY_INTERNAL_URL
+            value: {{ .Values.latency.internal.url}}
+          - name: LATENCY_INGRESS_URL
+            value: {{ .Values.latency.ingress.url}}
+          - name: LATENCY_LOADBALANCER_URL
+            value: {{ .Values.latency.loadbalancer.url}}
+          - name: LATENCY_MILLISECONDS_BETWEEN_REQUESTS
+            value: "{{ .Values.latency.milliseconds_between_requests}}"
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 8080
+        resources:
+{{ toYaml .Values.resources | indent 12 }}

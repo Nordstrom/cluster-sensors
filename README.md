@@ -28,6 +28,7 @@ helm upgrade --namespace=<namespace> --install \
   --set="latency.ingress.url=<ingress_url>" \
   --set="latency.internal.url=<service_url>" \
   --set="latency.loadbalancer.url=<loadbalancer_url>" \
-  --set="image=<image_tag>" \
-  sensors ./cluster-sensors
+  --set="image.name=quay.io/nordstrom/cluster-sensors" \
+  --set="image.tag=<image_tag>" \
+  sensors ./chart
 ```

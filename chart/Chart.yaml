@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Sensors to determine the health of a cluster
+name: sensors
+version: 0.2.0
