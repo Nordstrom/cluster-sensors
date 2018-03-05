@@ -118,17 +118,18 @@ func initMetrics() (m metricsType) {
 	}, []string{"stage", "path", "backend"})
 	prometheus.MustRegister(m.histogram)
 
-	m.errors = prometheus.NewCounter(prometheus.CounterOpts{
+	m.errors = prometheus.NewCounterVec(prometheus.CounterOpts{
 		Name: "sensors_latency_errors",
 		Help: "Number of times there was an error",
-	})
+	}, []string{"stage", "path", "backend"})
+
 	prometheus.MustRegister(m.errors)
 	return
 }
 
 type metricsType struct {
 	histogram *prometheus.HistogramVec
-	errors    prometheus.Counter
+	errors    *prometheus.CounterVec
 }
 
 type path struct {
@@ -140,7 +141,11 @@ type path struct {
 func (p path) measureLatencyAndRecord(metrics metricsType) {
 	measurement, err := p.measureLatency()
 	if err != nil {
-		metrics.errors.Inc()
+		stage := "without_name_lookup"
+		if measurement.dnsErr != nil {
+			stage = "name_lookup"
+		}
+		metrics.errors.With(prometheus.Labels{"stage": stage, "path": p.name, "backend": measurement.backendAddress.String()}).Inc()
 		return
 	}
 	p.lock.Lock()
@@ -149,7 +154,6 @@ func (p path) measureLatencyAndRecord(metrics metricsType) {
 }
 
 func (p path) measureLatency() (measurement results, err error) {
-
 	var dnsStart, dnsDone, firstByte time.Time
 	trace := &httptrace.ClientTrace{
 		DNSStart: func(dnsInfo httptrace.DNSStartInfo) {
@@ -157,6 +161,9 @@ func (p path) measureLatency() (measurement results, err error) {
 		},
 		DNSDone: func(dnsInfo httptrace.DNSDoneInfo) {
 			dnsDone = time.Now() // Measure time immediately and once
+			if dnsInfo.Err != nil {
+				measurement.dnsErr = err
+			}
 		},
 		GotFirstResponseByte: func() {
 			firstByte = time.Now()
@@ -219,6 +226,7 @@ func parseBackend(backendHostPort string) (*net.TCPAddr, error) {
 type results struct {
 	dnsTime            time.Duration
 	dnsDoneToCloseTime time.Duration
+	dnsErr             error
 	backendAddress     net.TCPAddr
 }
 
