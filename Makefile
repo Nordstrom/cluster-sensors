@@ -4,7 +4,7 @@ local_changes := $(shell git status --porcelain)
 
 export app_name := cluster-sensors
 export namespace := utils
-image_name := quay.io/nordstrom/$(app_name)
+image_name := gitlab-registry.nordstrom.com/k8s/platform-bootstrap/$(app_name)
 image_tag := v0.0.2-beta
 
 .PHONY: build_app test refresh_ecr_token
